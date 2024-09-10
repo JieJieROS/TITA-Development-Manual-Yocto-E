@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lighting Effects &mdash; TITA-Development-Manual v0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=7cf98a4c"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Motion Control" href="control.html" />
+    <link rel="prev" title="Robot-API-Unit" href="../Robot-API.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #070707" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Env-Set.html">Environment Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Robot-API.html">Robot-API-Unit</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Lighting Effects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#front-light-effects-control">Front Light Effects Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rear-light-effects-control">Rear Light Effects Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leg-light-effects-control">Leg Light Effects Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#light-switch">Light Switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#all-machine-lighting-effect-control">All machine lighting effect control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Motion Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="battery.html">Power Supply System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Motor.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="music.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slam.html">Sensory Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensor.html">Sensor Status Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Robot-Controller.html">Robot-Controller-Unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TITA-Tower.html">TITA Tower Manual</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单"  style="background: #070707" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TITA-Development-Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Robot-API.html">Robot-API-Unit</a></li>
+      <li class="breadcrumb-item active">Lighting Effects</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lighting-effects">
+<h1>Lighting Effects<a class="headerlink" href="#lighting-effects" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<p>The API of the lighting effects can fully control 104 LED beads of the entire machine, allowing you to exchange colors, gradient effects, and so on.</p>
+<section id="front-light-effects-control">
+<h2>Front Light Effects Control<a class="headerlink" href="#front-light-effects-control" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Control the Front Light Effects via Topic<br>
+<strong>Service：</strong> <code class="docutils literal notranslate"><span class="pre">interaction_manager/light_control/head_light_control_srv</span></code><br>
+<strong>Msg Type：</strong><code class="docutils literal notranslate"><span class="pre">tita_interaction_msgs/srv/HeadLightControlSrv</span></code><br>
+<strong>Code Example：</strong><br>
+Control：<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/[namespace]/interaction_manager/light_control/head_light_control_srv</span> <span class="pre">tita_interaction_msgs/srv/HeadLightControlSrv</span> <span class="pre">&quot;{head_light_control:</span> <span class="pre">{is_control:</span> <span class="pre">true,</span> <span class="pre">select_light_effect:</span> <span class="pre">0,</span> <span class="pre">rgbl_value:</span> <span class="pre">[0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0x00000000]}}&quot;</span></code><br>
+Value Range：<br>
+<strong>Bool is_control</strong>， <strong>Uin8_t select_light_effect</strong>， <strong>Uint32 rgbl_value[48]</strong><br>
+<strong>is_control</strong> is set to <strong>true</strong> when control is required, and <strong>false</strong> when control is relinquished.<br>
+<strong>select_light_effect</strong> = 0 , mean it is always on.<br>
+In the array <strong>Uin32_t rgbl[48]</strong>, each element represents the red, green, blue, and brightness values of a single LED. For example, the color value of a certain LED is given as <strong>0xfe00ff80U</strong>. This value indicates that the <strong>red</strong> component is <code class="docutils literal notranslate"><span class="pre">254</span> <span class="pre">(0xfeU)</span></code>, the <strong>green</strong> component is <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">(0x00U)</span></code>, the <strong>blue</strong> component is <code class="docutils literal notranslate"><span class="pre">255</span> <span class="pre">(0xffU)</span></code>, and the brightness is <code class="docutils literal notranslate"><span class="pre">128</span> <span class="pre">(0x80U)</span></code>.</p>
+</section>
+<section id="rear-light-effects-control">
+<h2>Rear Light Effects Control<a class="headerlink" href="#rear-light-effects-control" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Control the Rear Light Effects via Topic<br>
+<strong>Service：</strong> <code class="docutils literal notranslate"><span class="pre">interaction_manager/light_control/tail_light_control_srv</span></code><br>
+<strong>Msg Type：</strong><code class="docutils literal notranslate"><span class="pre">tita_interaction_msgs/srv/TailLightControlSrv</span></code><br>
+<strong>Code Example：</strong><br>
+Control：<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/[namespace]/interaction_manager/light_control/tail_light_control_srv</span> <span class="pre">tita_interaction_msgs/srv/TailLightControlSrv</span> <span class="pre">&quot;{tail_light_control:</span> <span class="pre">{is_control:</span> <span class="pre">true,</span> <span class="pre">select_light_effect:</span> <span class="pre">0,</span> <span class="pre">rgbl_value:</span> <span class="pre">[0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00,0xff00ff00,</span> <span class="pre">0xff00ff00,</span> <span class="pre">0xff00ff00]}}&quot;</span></code><br>
+Value Range：Bool is_control,，Uint8_t select_light_effect，Uin32_t rgbl_value[36]<br></p>
+</section>
+<section id="leg-light-effects-control">
+<h2>Leg Light Effects Control<a class="headerlink" href="#leg-light-effects-control" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Control the leg light effects.<br>
+<strong>Service：</strong> <br>
+left leg<code class="docutils literal notranslate"><span class="pre">interaction_manager/light_control/left_leg_light_control_srv</span></code><br>
+right leg<code class="docutils literal notranslate"> <span class="pre">interaction_manager/light_control/right_leg_light_control_srv</span></code><br>
+<strong>Msg Type：</strong><br>
+left leg<code class="docutils literal notranslate"><span class="pre">tita_interaction_msgs/srv/LegLightControlSrv</span> </code><br>
+right leg<code class="docutils literal notranslate"><span class="pre">tita_interaction_msgs/srv/LegLightControlSrv</span></code><br>
+<strong>Code Example：</strong><br>
+Control：<br>
+left leg <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/[namespace]/interaction_manager/light_control/left_leg_light_control_srv</span> <span class="pre">tita_interaction_msgs/srv/LegLightControlSrv</span> <span class="pre">&quot;{leg_light_control:</span> <span class="pre">{is_control:</span> <span class="pre">true,</span> <span class="pre">select_light_effect:</span> <span class="pre">0,</span> <span class="pre">rgb_value:</span> <span class="pre">[0xffff00ff,</span> <span class="pre">0xff00ffff,</span> <span class="pre">0x00ffffff,0xffff00ff,</span> <span class="pre">0xff00ffff,</span> <span class="pre">0x00ffffff,0xffff00ff,</span> <span class="pre">0xff00ffff,</span> <span class="pre">0x00ffffff,0xffff00ff]}}&quot;</span></code><br>
+right leg <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/[namespace]/interaction_manager/light_control/right_leg_light_control_srv</span> <span class="pre">tita_interaction_msgs/srv/LegLightControlSrv</span> <span class="pre">&quot;{leg_light_control:</span> <span class="pre">{is_control:</span> <span class="pre">true,</span> <span class="pre">select_light_effect:</span> <span class="pre">0,</span> <span class="pre">rgb_value:</span> <span class="pre">[0xffff00ff,</span> <span class="pre">0xff00ffff,</span> <span class="pre">0x00ffffff,0xffff00ff,</span> <span class="pre">0xff00ffff,</span> <span class="pre">0x00ffffff,0xffff00ff,</span> <span class="pre">0xff00ffff,</span> <span class="pre">0x00ffffff,0xffff00ff]}}&quot;</span></code><br>
+Value Range：uint8 select_leg_board，bool is_control，uint8 select_light_effect， uint32[10] rgb_value.<br></p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>The basic control is the same as mentioned earlier. Set select_leg_board to 1 for the robot’s left leg and to 2 for the right leg.
+The select_light_effect currently as a default value of 0, which represents a constant brightness.
+Please note that the uint32_t rgb_value[10] only represents the red, green, and blue values, without brightness, as it is just a placeholder to fill the uint32_t. For example, a color value of 0xfe00ff80U for a certain LED bead indicates red: 254 (0xfeU), green: 0 (0x00U), blue: 255 (0xffU), and brightness: (default value is meaningless) for the overall presented color. For the LED beads on the legs, the higher the values of red, green, and blue you set, the brighter the corresponding LED bead will be, and vice versa, the lower the values, the dimmer the LED bead will be.</p>
+</div>
+</section>
+<section id="light-switch">
+<h2>Light Switch<a class="headerlink" href="#light-switch" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> You can control the power of the entire machine’s light boards<br>
+<strong>Service：</strong> <code class="docutils literal notranslate"><span class="pre">interaction_manager/light_control/light_power_switch_srv</span></code><br>
+<strong>Msg Type：</strong><code class="docutils literal notranslate"><span class="pre">tita_interaction_msgs/srv/LightPowerSwitchSrv</span></code><br>
+<strong>Code Example：</strong><br>
+Control：<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/[namespace]/interaction_manager/light_control/light_power_switch_srv</span> <span class="pre">tita_interaction_msgs/srv/LightPowerSwitchSrv</span> <span class="pre">&quot;{light_power_switch:</span> <span class="pre">{is_head_light_power_on:</span> <span class="pre">true,</span> <span class="pre">is_tail_light_power_on:</span> <span class="pre">true,</span> <span class="pre">is_left_light_power_on:</span> <span class="pre">true,</span> <span class="pre">is_right_light_power_on:</span> <span class="pre">true}}&quot;</span></code><br>
+Value Range：<br>
+bool is_head_light_power_on<br>
+bool is_tail_light_power_on<br>
+bool is_left_light_power_on<br>
+bool is_right_light_power_on<br></p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>The default setting is true for all. Wherever you want to turn off the lights, set it to false.</p>
+</div>
+</section>
+<section id="all-machine-lighting-effect-control">
+<h2>All machine lighting effect control<a class="headerlink" href="#all-machine-lighting-effect-control" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Control the state pointer of the entire machine’s light board state machine.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">interaction/light_control/light_fsm_control</span></code><br>
+<strong>Msg Type：</strong><code class="docutils literal notranslate"><span class="pre">tita_interaction_msgs::msg::LightFsmControl</span></code><br>
+<strong>Code Example：</strong><br>
+Control：<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">pub</span> <span class="pre">/[namespace]/interaction/light_control/light_fsm_control</span> <span class="pre">tita_interaction_msgs/msg/LightFsmControl</span> <span class="pre">&quot;{head_light_fsm:</span> <span class="pre">1,</span> <span class="pre">tail_light_fsm:</span> <span class="pre">1,</span> <span class="pre">left_leg_light_fsm:</span> <span class="pre">1,</span> <span class="pre">right_leg_light_fsm:</span> <span class="pre">1,</span> <span class="pre">head_fsm_lock:</span> <span class="pre">false,</span> <span class="pre">tail_fsm_lock:</span> <span class="pre">false,</span> <span class="pre">left_leg_fsm_lock:</span> <span class="pre">false,</span> <span class="pre">right_leg_fsm_lock:</span> <span class="pre">false}&quot;</span> <span class="pre">-1</span></code><br>
+Inquiry：<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/[namespace]/interaction/light_control/light_fsm_control</span> <span class="pre">tita_interaction_msgs/msg/LightFsmControl</span></code><br>
+Value Range：<br></p>
+<ol class="arabic simple">
+<li><p>head_light_fsm，tail_light_fsm，left_leg_light_fsm，right_leg_fsm;value:0~255.<br></p></li>
+<li><p>head_fsm_lock,tail_fsm_lock,left_fsm_lock,right_fsm_lock; all bool<br></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>General inquiries are fine; control is used for debugging.
+The fsm_lock is used to lock the current state of the state machine, causing the robot to repeat the lighting effect for debugging purposes.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../Robot-API.html" class="btn btn-neutral float-left" title="Robot-API-Unit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="control.html" class="btn btn-neutral float-right" title="Motion Control" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, DirectDriveTech.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

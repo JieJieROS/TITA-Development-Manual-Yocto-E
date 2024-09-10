@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power Supply System &mdash; TITA-Development-Manual v0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=7cf98a4c"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Motor Control" href="Motor.html" />
+    <link rel="prev" title="Motion Control" href="control.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #070707" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Env-Set.html">Environment Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Robot-API.html">Robot-API-Unit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="light.html">Lighting Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Motion Control</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Power Supply System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-the-information-of-the-left-battery">Check the information of the left battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-the-information-of-the-right-battery">Check the information of the right battery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-the-information-of-the-supercapacitor">Check the information of the supercapacitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-the-power-supply-statistics-information">Check the power supply statistics information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Motor.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="music.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slam.html">Sensory Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensor.html">Sensor Status Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Robot-Controller.html">Robot-Controller-Unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TITA-Tower.html">TITA Tower Manual</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单"  style="background: #070707" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TITA-Development-Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Robot-API.html">Robot-API-Unit</a></li>
+      <li class="breadcrumb-item active">Power Supply System</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="power-supply-system">
+<h1>Power Supply System<a class="headerlink" href="#power-supply-system" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<p>The API of the power supply system can only perform query actions on information data such as battery information</p>
+<section id="check-the-information-of-the-left-battery">
+<h2>Check the information of the left battery<a class="headerlink" href="#check-the-information-of-the-left-battery" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Subscribe to the <strong>Topic</strong> for feedback on the left battery information.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">system/batteries/left</span></code><br>
+<strong>Msg Type：</strong> <code class="docutils literal notranslate"><span class="pre">tita_system_msgs/msg/BatterieStates</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/[namespace]/system/batteries/left</span></code></p>
+</section>
+<section id="check-the-information-of-the-right-battery">
+<h2>Check the information of the right battery<a class="headerlink" href="#check-the-information-of-the-right-battery" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Subscribe to the <strong>Topic</strong> for feedback on the right battery information.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">system/batteries/right</span></code><br>
+<strong>Msg Type：</strong> <code class="docutils literal notranslate"><span class="pre">tita_system_msgs/msg/BatterieStates</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/[namespace]/system/batteries/right</span></code><br></p>
+</section>
+<section id="check-the-information-of-the-supercapacitor">
+<h2>Check the information of the supercapacitor<a class="headerlink" href="#check-the-information-of-the-supercapacitor" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Subscribe to the <strong>Topic</strong> for feedback on supercapacitor information.
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">system/batteries/super</span></code><br>
+<strong>Msg Type：</strong> <code class="docutils literal notranslate"><span class="pre">tita_system_msgs/msg/BatterieStates</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/[namespace]/system/batteries/super</span></code></p>
+</section>
+<section id="check-the-power-supply-statistics-information">
+<h2>Check the power supply statistics information<a class="headerlink" href="#check-the-power-supply-statistics-information" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Subscribe to the <strong>Topic</strong> for feedback on power supply statistics information.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">system/power_supply/info</span></code><br>
+<strong>Msg Type：</strong> <code class="docutils literal notranslate"><span class="pre">tita_system_msgs/msg/PowerSupplyInfo</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/[namespace]/system/power_supply/info</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>Enable the power data upload feature by modifying the file /usr/share/power_bridges/conf/tita_power.toml, set record_battery_info=1 (#0 to disable, 1 to enable)</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="control.html" class="btn btn-neutral float-left" title="Motion Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Motor.html" class="btn btn-neutral float-right" title="Motor Control" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, DirectDriveTech.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

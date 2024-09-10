@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sensory Information &mdash; TITA-Development-Manual v0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=7cf98a4c"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Sensor Status Information" href="sensor.html" />
+    <link rel="prev" title="Audio" href="music.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #070707" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Env-Set.html">Environment Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Robot-API.html">Robot-API-Unit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="light.html">Lighting Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Motion Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="battery.html">Power Supply System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Motor.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="music.html">Audio</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sensory Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#visual-odometry-vo">Visual Odometry（VO）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slam-odometry">SLAM Odometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pose-reset">Pose Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-sensor-data">Camera Sensor Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-calibration-data">Camera Calibration Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-point-cloud-data">Camera Point Cloud Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-imu-data">Camera IMU Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#front-face-tof-data">Front Face ToF Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lower-tof-data">Lower ToF Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-joint-coordinate-system">Robot Joint Coordinate System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wheeled-odometry">Wheeled Odometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slope-detection">Slope Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tof-based-staircase-detection-and-identification-point-cloud">ToF-based Staircase Detection and Identification Point Cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-distance-recognition">Step Distance Recognition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slope-angle-detection">Slope Angle Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensor.html">Sensor Status Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Robot-Controller.html">Robot-Controller-Unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TITA-Tower.html">TITA Tower Manual</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单"  style="background: #070707" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TITA-Development-Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Robot-API.html">Robot-API-Unit</a></li>
+      <li class="breadcrumb-item active">Sensory Information</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sensory-information">
+<h1>Sensory Information<a class="headerlink" href="#sensory-information" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<p>Sensory information encompasses data such as SLAM, camera imagery, calibration, IMU, and ToF. In subsequent secondary development, these interfaces can be used to acquire and invoke data.</p>
+<hr class="docutils" />
+<section id="visual-odometry-vo">
+<h2>Visual Odometry（VO）<a class="headerlink" href="#visual-odometry-vo" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Obtain a rapid 60Hz pose.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/visual_slam/tracking/vo_pose</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/PoseStamped</span></code></p>
+</section>
+<section id="slam-odometry">
+<h2>SLAM Odometry<a class="headerlink" href="#slam-odometry" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Odometry that integrates IMU and has undergone pose optimization.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/visual_slam/tracking/Odometry</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">nav_msgs/msg/Odometry</span></code></p>
+</section>
+<section id="pose-reset">
+<h2>Pose Reset<a class="headerlink" href="#pose-reset" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Reset the odometry to zero.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/visual_slam/reset</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">visual_slam/reset</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/visual_slam/reset</span> <span class="pre">tita_perception_msgs/srv/Reset</span></code></p>
+</section>
+<section id="camera-sensor-data">
+<h2>Camera Sensor Data<a class="headerlink" href="#camera-sensor-data" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Publish undistorted color images from the camera at 60Hz.<br>
+<strong>Topic：</strong><br>
+<code class="docutils literal notranslate"><span class="pre">perception/sensor/camera/left</span></code><br>
+<code class="docutils literal notranslate"><span class="pre">perception/sensor/camera/right</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/Image</span></code></p>
+</section>
+<section id="camera-calibration-data">
+<h2>Camera Calibration Data<a class="headerlink" href="#camera-calibration-data" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Publish camera calibration data at a frequency of 60Hz.<br>
+<strong>Topic：</strong><br>
+<code class="docutils literal notranslate"><span class="pre">perception/sensor/camera_info/left</span></code><br>
+<code class="docutils literal notranslate"><span class="pre">perception/sensor/camera_info/right</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/CameraInfo</span></code></p>
+</section>
+<section id="camera-point-cloud-data">
+<h2>Camera Point Cloud Data<a class="headerlink" href="#camera-point-cloud-data" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Camera-estimated depth data, colored point cloud. Contains &lt; 140,544 points, Point cloud distance ≤ 5 meters.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/sensor/camera/point_cloud</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/PointCloud2</span></code></p>
+</section>
+<section id="camera-imu-data">
+<h2>Camera IMU Data<a class="headerlink" href="#camera-imu-data" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Camera IMU data includes acceleration, angular velocity, and posture.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/sensor/camera/imu</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/Imu</span></code></p>
+</section>
+<section id="front-face-tof-data">
+<h2>Front Face ToF Data<a class="headerlink" href="#front-face-tof-data" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Front-facing ToF (Time-of-Flight) converted point cloud data. 8x8.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/sensor/spad/face/point</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/PointCloud2</span></code></p>
+</section>
+<section id="lower-tof-data">
+<h2>Lower ToF Data<a class="headerlink" href="#lower-tof-data" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Lower ToF converted point cloud data. 8x8.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/sensor/spad/neck/point</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/PointCloud2</span></code></p>
+</section>
+<section id="robot-joint-coordinate-system">
+<h2>Robot Joint Coordinate System<a class="headerlink" href="#robot-joint-coordinate-system" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Synchronize joint coordinates.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/wheel/tracking/odometry</span></code><br>
+<strong>Msg Type s-e：</strong> <code class="docutils literal notranslate"><span class="pre">tf2_msgs/msg/TFMessage</span></code></p>
+</section>
+<section id="wheeled-odometry">
+<h2>Wheeled Odometry<a class="headerlink" href="#wheeled-odometry" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Short-range odometry. Unable to record Z-axis information.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">perception/wheel/tracking/odometry</span></code><br>
+<strong>Msg Type s-e：</strong><code class="docutils literal notranslate"><span class="pre">nav_msgs/msg/Odometry</span></code></p>
+</section>
+<section id="slope-detection">
+<h2>Slope Detection<a class="headerlink" href="#slope-detection" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Based on the area that is 50 cm to one meter ahead and as wide as the robot.<br>
+<strong>Topic：</strong><code class="docutils literal notranslate"><span class="pre">perception/sensor/camera/attention_region</span></code><br>
+<strong>Msg Type s-e：</strong><code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/PointCloud2</span></code></p>
+</section>
+<section id="tof-based-staircase-detection-and-identification-point-cloud">
+<h2>ToF-based Staircase Detection and Identification Point Cloud<a class="headerlink" href="#tof-based-staircase-detection-and-identification-point-cloud" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Each set of four points represents a step. There are a total of eight points.<br>
+<strong>Topic：</strong><code class="docutils literal notranslate"><span class="pre">perception/spad/stair/point_cloud</span></code><br>
+<strong>Msg Type s-e：</strong><code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/PointCloud2</span></code></p>
+</section>
+<section id="step-distance-recognition">
+<h2>Step Distance Recognition<a class="headerlink" href="#step-distance-recognition" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> The distance from the steps to the robot’s base_link is calculated based on the recognized points.<br>
+<strong>Topic：</strong><code class="docutils literal notranslate"><span class="pre">perception/spad/stair/distance</span></code><br>
+<strong>Msg Type s-e：</strong><code class="docutils literal notranslate"><span class="pre">std_msgs/msg/Float</span></code></p>
+</section>
+<section id="slope-angle-detection">
+<h2>Slope Angle Detection<a class="headerlink" href="#slope-angle-detection" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Angle feedback of the slope detection area.<br>
+<strong>Topic：</strong><code class="docutils literal notranslate"><span class="pre">perception/sensor/camera/attention_region/angle</span></code><br>
+<strong>Msg Type s-e：</strong><code class="docutils literal notranslate"><span class="pre">std_msgs/msg/Float</span></code></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="music.html" class="btn btn-neutral float-left" title="Audio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="sensor.html" class="btn btn-neutral float-right" title="Sensor Status Information" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, DirectDriveTech.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

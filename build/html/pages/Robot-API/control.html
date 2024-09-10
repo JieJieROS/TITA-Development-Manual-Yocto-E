@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion Control &mdash; TITA-Development-Manual v0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=7cf98a4c"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Power Supply System" href="battery.html" />
+    <link rel="prev" title="Lighting Effects" href="light.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #070707" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Env-Set.html">Environment Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Robot-API.html">Robot-API-Unit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="light.html">Lighting Effects</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Motion Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#stand">Stand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#height">Height</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pitch-and-roll">Pitch and Roll</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jump">Jump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machine-status">Machine Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="battery.html">Power Supply System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Motor.html">Motor Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="music.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slam.html">Sensory Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensor.html">Sensor Status Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Robot-Controller.html">Robot-Controller-Unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TITA-Tower.html">TITA Tower Manual</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单"  style="background: #070707" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TITA-Development-Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Robot-API.html">Robot-API-Unit</a></li>
+      <li class="breadcrumb-item active">Motion Control</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="motion-control">
+<h1>Motion Control<a class="headerlink" href="#motion-control" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<p>TITA controls robot movement services and provides machine status data to users through a ROS2 plugin. This plugin offers the necessary API interfaces, converting control information into ROS message.</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>First, you need to open the API calling interface
+vim /usr/share/tita_bringup/params/default_param.yaml
+将 locomotion_manager中的control_motion_mode 字段改为 1
+0: controller control moded
+1: api control mode
+2: autonomy control mode</p>
+</div>
+<section id="stand">
+<h2>Stand<a class="headerlink" href="#stand" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Enter the standing mode to control the standing posture.<br>
+<strong>Topic：</strong>  <code class="docutils literal notranslate"><span class="pre">command/controller/lock</span></code><br>
+<strong>MsgType：</strong> <code class="docutils literal notranslate"><span class="pre">tita_motion_msgs/msg/ControllerCommandLock</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">pub</span> <span class="pre">/tita2303895/command/controller/lock</span> <span class="pre">tita_motion_msgs/msg/ControllerCommandLock</span> <span class="pre">&quot;{lock_state:</span> <span class="pre">2}&quot;</span> <span class="pre">-1</span></code></p>
+</section>
+<section id="height">
+<h2>Height<a class="headerlink" href="#height" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Control the robot’s postural elevation through programming.<br>
+<strong>Topic：</strong>  <code class="docutils literal notranslate"><span class="pre">locomotion/move_target/height</span></code><br>
+<strong>MsgType：</strong> <code class="docutils literal notranslate"><span class="pre">tita_motion_msgs/msg/Height</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">pub</span> <span class="pre">-r</span> <span class="pre">30</span> <span class="pre">/{ns}/locomotion/move_target/height</span> <span class="pre">tita_motion_msgs/msg/Height</span> <span class="pre">&quot;{height:</span> <span class="pre">0.2}&quot;</span></code><br>
+<strong>Value Range：</strong> height：max 0.30 min 0.09</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>Sending frequency ≥ 30 HZ.</p>
+</div>
+</section>
+<section id="pitch-and-roll">
+<h2>Pitch and Roll<a class="headerlink" href="#pitch-and-roll" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> Pitch and roll commands need to be sent simultaneously; Currently Control: linear.x forward and backward velocity, angular.z left and right turn velocity, linear.y roll angular velocity, angular.y pitch angular velocity; Not Used (set as empty): linear.z and angular.x.<br>
+<strong>Topic：</strong>  <code class="docutils literal notranslate"><span class="pre">command/controller/api/move</span></code><br>
+<strong>MsgType：</strong> <code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/TwistStamped</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">pub</span> <span class="pre">/{ns}/command/controller/api/move</span> <span class="pre">geometry_msgs/msg/TwistStamped</span> <span class="pre">&quot;{</span> <span class="pre">twist:</span> <span class="pre">{linear:</span> <span class="pre">{x:</span> <span class="pre">0.5,</span> <span class="pre">y:</span> <span class="pre">0.0,</span> <span class="pre">z:</span> <span class="pre">0.0},</span> <span class="pre">angular:</span> <span class="pre">{x:</span> <span class="pre">0.0,</span> <span class="pre">y:</span> <span class="pre">0.0,</span> <span class="pre">z:</span> <span class="pre">0.0}}}&quot;</span></code><br>
+<strong>Value Range：</strong> <br>
+linear x min : ±0.82. max ±1.52<br>
+twist.angular.z min: ±0.42 max ±1.42<br>
+height min: 0.09 max: 0.30<br>
+linear.y: ±0.942(0.3 * PI)<br>
+angular.y: ±0.2<br></p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>Sending frequency ≥ 30 HZ.</p>
+</div>
+</section>
+<section id="jump">
+<h2>Jump<a class="headerlink" href="#jump" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> This API is used to control the robot’s jumping action.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">command/controller/jump</span></code><br>
+<strong>Msg Type：</strong> <code class="docutils literal notranslate"><span class="pre">tita_motion_msgs/msg/ControllerCommandJump</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">pub</span> <span class="pre">/{ns}/command/controller/jump</span> <span class="pre">tita_motion_msgs/msg/ControllerCommandJump</span> <span class="pre">&quot;{jump_state:</span> <span class="pre">2}&quot;</span> <span class="pre">-1</span></code><br>
+<strong>Value Range：</strong><br>
+jump_state = JUMP (0x02)<br>
+IDLE 0x00 /CHARGE 0x01 /JUMP 0x02</p>
+</section>
+<section id="machine-status">
+<h2>Machine Status<a class="headerlink" href="#machine-status" title="Link to this heading"></a></h2>
+<p><strong>Function Overview：</strong> This interface is for monitoring the current posture of the machine, allowing you to know whether the current machine status and feedback information match.<br>
+<strong>Topic：</strong> <code class="docutils literal notranslate"><span class="pre">locomotion/locomotion_status</span></code><br>
+<strong>Msg Type：</strong> <code class="docutils literal notranslate"><span class="pre">tita_motion_msgs::msg::LocomotionStatus</span></code><br>
+<strong>Code Example：</strong> <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">echo</span> <span class="pre">/{ns}/locomotion/locomotion_status</span></code><br>
+<strong>Value Range：</strong><br>
+DIE = 0x00<br>
+INIT = 0x01<br>
+TRANSFORM_UP =0x02<br>
+STAND = 0x03<br>
+TRANSFORM_DOWN = 0x04<br>
+CRASH = 0x05<br>
+SUSPENDING = 0x06<br>
+JUMP = 0x07</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="light.html" class="btn btn-neutral float-left" title="Lighting Effects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="battery.html" class="btn btn-neutral float-right" title="Power Supply System" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, DirectDriveTech.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

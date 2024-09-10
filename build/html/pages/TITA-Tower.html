@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TITA Tower Manual &mdash; TITA-Development-Manual v0.0.1 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=7cf98a4c"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="Robot Controller Pairing" href="Robot-Controller/how-to-pair.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #070707" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Env-Set.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Robot-API.html">Robot-API-Unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Robot-Controller.html">Robot-Controller-Unit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TITA Tower Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">1. Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preparation-work">1.1 Preparation work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-configuration">1.2 Environment Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-machine-status">1.2.1 Test Machine Status</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tita-tower-software">2. TITA Tower Software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-software">Start software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop-software">Stop Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#real-time-output">Real-time output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-rviz">Start rviz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单"  style="background: #070707" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TITA-Development-Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TITA Tower Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tita-tower-manual">
+<h1>TITA Tower Manual<a class="headerlink" href="#tita-tower-manual" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<section id="quick-start">
+<h2>1. Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<section id="preparation-work">
+<h3>1.1 Preparation work<a class="headerlink" href="#preparation-work" title="Link to this heading"></a></h3>
+<p>Before using the TITA Tower, the following preparations are needed：</p>
+<ul class="simple">
+<li><p><strong>Install the Power Supply</strong>
+The TITA Tower is powered through its own DB25 external interface, and an officially certified DB25 connection cable is required.<br>
+<strong>Warning:</strong> Hot plugging is not recommended on DB25 interface, which may cause abnormal power loss in the TITA Tower</p></li>
+<li><p><strong>Debug</strong>
+TITA Tower supports Ethernet as well as  multi-machine interactive debugging. Pleasse connect TITA Tower to your laptop via an Ethernet cable.</p></li>
+<li><p><strong>Check IP</strong>
+You can access the device information Web: <a class="reference external" href="http://10.42.0.1:8000">http://10.42.0.1:8000</a> by connecting to the TITA Tower’s hotspot.
+<img alt="t1" src="../_images/t1.png" />
+<img alt="t2" src="../_images/t2.png" /></p>
+<ul>
+<li><p>注意：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">192.168.19.101</span></code> //The IP address assigned to the wired network port.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">10.42.0.1</span></code> //The IP address assigned to the wireless WiFi network.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="environment-configuration">
+<h3>1.2 Environment Configuration<a class="headerlink" href="#environment-configuration" title="Link to this heading"></a></h3>
+<p>Normally , TITA Tower ‘s <code class="docutils literal notranslate"><span class="pre">ROS_DOMAIN_ID</span></code>  is <strong>42</strong> .<br>
+To achieve multi-machine interaction ,  you need set the Debug Machine’s <code class="docutils literal notranslate"><span class="pre">ROS_DOMAIN_ID</span></code> to <strong>42</strong> , and then <code class="docutils literal notranslate"><span class="pre">soure</span> <span class="pre">~/.bashrc</span></code></p>
+<section id="test-machine-status">
+<h4>1.2.1 Test Machine Status<a class="headerlink" href="#test-machine-status" title="Link to this heading"></a></h4>
+<p>When the TITA Tower is  powered on, the working light turns blue ,  indicating its standby mode.<br>
+Open the terminal and use <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">list</span></code>, you can see the following topics:
+<img alt="t3" src="../_images/t3.png" /></p>
+</section>
+</section>
+</section>
+<section id="tita-tower-software">
+<h2>2. TITA Tower Software<a class="headerlink" href="#tita-tower-software" title="Link to this heading"></a></h2>
+<section id="start-software">
+<h3>Start software<a class="headerlink" href="#start-software" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bool<span class="w"> </span>success
+string<span class="w"> </span>message
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">start</span> <span class="pre">std_srvs/srv/Trigger</span> <span class="pre">&quot;{}&quot;</span></code>
+<img alt="t4" src="../_images/t4.png" /></p>
+</section>
+<section id="stop-software">
+<h3>Stop Software<a class="headerlink" href="#stop-software" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>---
+bool<span class="w"> </span>success
+string<span class="w"> </span>message
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">stop</span> <span class="pre">std_srvs/srv/Trigger</span> <span class="pre">&quot;{}&quot;</span></code>
+<img alt="t5" src="../_images/t5.png" /></p>
+</section>
+<section id="real-time-output">
+<h3>Real-time output<a class="headerlink" href="#real-time-output" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>It can provide high-precision odometry information</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nav_msgs/msg/Odometry
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>mapping/odometry
+</pre></div>
+</div>
+</li>
+<li><p><strong>GPS latitude and longitude information</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sensor_msgs/msg/NavSatFix
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>gps/gnss_soln
+</pre></div>
+</div>
+</li>
+<li><p><strong>Color PointCloud</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sensor_msgs/msg/PointCloud2
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>cloud_colored
+</pre></div>
+</div>
+</li>
+<li><p><strong>Left Camera CompressData</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sensor_msgs/msg/CompressedImage
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>camera/left/jpeg
+</pre></div>
+</div>
+</li>
+<li><p><strong>Right Camera CompressData</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sensor_msgs/msg/CompressedImage
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>camera/right/jpeg
+</pre></div>
+</div>
+</li>
+<li><p><strong>Left Camera PreviewData</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sensor_msgs/msg/Image
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>camera/left/preview
+</pre></div>
+</div>
+</li>
+<li><p><strong>Right Camera PreviewData</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sensor_msgs/msg/Image
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>camera/right/preview
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="start-rviz">
+<h3>Start rviz<a class="headerlink" href="#start-rviz" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">1</span><span class="w"> </span>rviz2
+</pre></div>
+</div>
+<p><img alt="t6" src="../_images/t6.PNG" /></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="Robot-Controller/how-to-pair.html" class="btn btn-neutral float-left" title="Robot Controller Pairing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, DirectDriveTech.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
